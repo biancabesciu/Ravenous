@@ -25,13 +25,13 @@ let businesses = [
 ];
 
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
         <div className="App">
             <h1>ravenous</h1>
             <SearchBar />
-            <BusinessList business={businesses}/>
+            <BusinessList businesses={businesses}/>
         </div>
     );
   }
