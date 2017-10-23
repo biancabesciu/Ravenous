@@ -1,7 +1,7 @@
 import React from 'react';
 import "./BusinessList.css";
 import Business from '../Business/Business';
-import business from '../../App';
+import business from '../App/App';
 
 class BusinessList extends React.Component {
     render() {
