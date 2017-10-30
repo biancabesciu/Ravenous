@@ -1,7 +1,6 @@
 // Yelp API connection creds
 const clientId = 'mHnuVCDGYZHm-wsldecEtg';
 const secret = 'hRYG0TFLuLZosAAoCrWUpXb5tXupUZz9mB34ilQOZOnndrVYWu3zo2bFLw5x1usi';
-const urlCORS = 'https://cors-anywhere.herokuapp.com/';
 
 let accessToken = '';
 
@@ -14,7 +13,7 @@ const Yelp = {
         }
 
         // Need to request a new access token
-        return fetch(urlCORS + 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=' + clientId + '&client_secret=' + secret, {method: 'POST'
+        return fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=' + clientId + '&client_secret=' + secret, {method: 'POST'
         }).then(response => {
             if(response.ok) {
                 return response.json();
@@ -24,14 +23,14 @@ const Yelp = {
 
     async search(term, location, sortBy) {
         return Yelp.getAccessToken().then(() => {
-            return fetch(urlCORS + 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=' + term + '&location=' + location + '&sort_by=' + sortBy,
-                {headers: {'Authorization': 'Bearer $accessToken'}}).then(response => {
+            return fetch('https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term='+ term + '&location=' + location + '&sort_by=' + sortBy,
+                {headers: {Authorization: 'Bearer ' + accessToken}}).then(response => {
                 if(response.ok) {
                     return response.json();
                 }
                 }).then(jsonResponse => {
-                    if(jsonResponse.business) {
-                        return jsonResponse.business.map(
+                    if(jsonResponse.businesses) {
+                        return jsonResponse.businesses.map(
                             business => {
                                 return {
                                     id: business.id,
