@@ -1,13 +1,6 @@
 import React from 'react';
 import "./SearchBar.css";
 
-const sortByOptions = {
-    'Best Match': 'best_match',
-    'Highest Rated': 'rating',
-    'Most Reviewed': 'review_count'
-};
-
-
 class SearchBar extends React.Component {
     constructor(props) {
         super(props);
@@ -21,6 +14,12 @@ class SearchBar extends React.Component {
         this.handleLocationChange = this.handleLocationChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
     }
+
+    sortByOptions = {
+        'Best Match': 'best_match',
+        'Highest Rated': 'rating',
+        'Most Reviewed': 'review_count'
+    };
 
     getSortByClass(sortByOption) {
         if(this.state.sortBy === sortByOption) {
@@ -56,8 +55,8 @@ class SearchBar extends React.Component {
 
 
     renderSortByOptions() {
-        return Object.keys(sortByOptions).map(sortByOption => {
-            let sortByOptionValue = sortByOptions[sortByOption];
+        return Object.keys(this.sortByOptions).map(sortByOption => {
+            let sortByOptionValue = this.sortByOptions[sortByOption];
             return (
                 <li className={this.getSortByClass(sortByOptionValue)}
                     key={sortByOptionValue}
@@ -76,8 +75,8 @@ class SearchBar extends React.Component {
                     </ul>
                 </div>
                 <div className="SearchBar-fields">
-                    <input onChange={this.handleTermChange} placeholder="pizza" />
-                    <input onChange={this.handleLocationChange} placeholder="amsterdam" />
+                    <input onChange={this.handleTermChange} placeholder="Search business" />
+                    <input onChange={this.handleLocationChange} placeholder="where?" />
                 </div>
                 <div className="SearchBar-submit">
                     <a onClick={this.handleSearch}>Let's Go</a>
